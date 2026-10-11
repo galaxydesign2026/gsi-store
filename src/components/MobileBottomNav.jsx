@@ -23,6 +23,7 @@ const NAV_BY_ROLE = {
   team_manager: [
     { label: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },
     { label: "Approvals", icon: CheckSquare, path: "/approvals" },
+    { label: "Inventory", icon: Package, path: "/inventory" },
     { label: "Returns", icon: Undo2, path: "/returns" },
     { label: "Users", icon: UserCog, path: "/users" },
   ],
@@ -40,6 +41,7 @@ const NAV_BY_ROLE = {
   director: [
     { label: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },
     { label: "Approvals", icon: CheckSquare, path: "/approvals" },
+    { label: "Inventory", icon: Package, path: "/inventory" },
     { label: "Reports", icon: BarChart3, path: "/reports" },
     { label: "Users", icon: UserCog, path: "/users" },
     { label: "Admin", icon: Settings, path: "/admin" },

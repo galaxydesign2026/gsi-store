@@ -82,6 +82,8 @@ export default function Inventory() {
   // Read user from localStorage synchronously — page renders instantly
   const gsiUser = getGsiUser();
   const isAdmin = gsiUser?.role?.toLowerCase() === "admin";
+  // Director & Project Manager: view-only access (no add / edit / delete)
+  const isViewOnly = ["director", "team_manager"].includes(gsiUser?.role?.toLowerCase());
 
   useEffect(() => {
     if (loadedRef.current) return;
@@ -141,12 +143,17 @@ export default function Inventory() {
       {/* Header */}
       <div className="flex items-center justify-between mb-5">
         <div>
-          <h1 className="text-xl font-bold text-foreground">Inventory</h1>
+          <h1 className="text-xl font-bold text-foreground flex items-center gap-2">
+            Inventory
+            {isViewOnly && (
+              <span className="text-[11px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">View only</span>
+            )}
+          </h1>
           <p className="text-sm text-muted-foreground">
             {loading ? "Loading…" : `${filtered.length} item${filtered.length !== 1 ? "s" : ""}`}
           </p>
         </div>
-        {isAdmin && (
+        {isAdmin && !isViewOnly && (
           <Button onClick={() => { setEditItem(null); setShowForm(true); }} className="h-10 px-4 gap-2">
             <Plus className="w-4 h-4" /> Add Item
           </Button>
@@ -208,7 +215,7 @@ export default function Inventory() {
                     {["Item Code", "Item Name", "Category", "Description", "Total Qty", "Available Qty", "Min Qty", "Status"].map(h => (
                       <th key={h} className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wide whitespace-nowrap">{h}</th>
                     ))}
-                    {isAdmin && <th className="px-4 py-3" />}
+                    {isAdmin && !isViewOnly && <th className="px-4 py-3" />}
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border">
@@ -228,7 +235,7 @@ export default function Inventory() {
                         <td className={`px-4 py-3 font-semibold ${isLow ? "text-amber-700" : ""}`}>{item.availableqty ?? "—"}</td>
                         <td className="px-4 py-3 text-muted-foreground">{item.minimumqty ?? "—"}</td>
                         <td className="px-4 py-3"><StatusPill status={item.status} availableqty={item.availableqty} minimumqty={item.minimumqty} /></td>
-                        {isAdmin && (
+                        {isAdmin && !isViewOnly && (
                           <td className="px-4 py-3 text-right whitespace-nowrap">
                             <button
                               onClick={() => { setEditItem(item); setShowForm(true); }}
@@ -285,7 +292,7 @@ export default function Inventory() {
                       <p className="font-semibold text-foreground">{item.minimumqty ?? "—"}</p>
                     </div>
                   </div>
-                  {isAdmin && (
+                  {isAdmin && !isViewOnly && (
                     <div className="flex gap-1 mt-3 pt-3 border-t border-border">
                       <button
                         onClick={() => { setEditItem(item); setShowForm(true); }}

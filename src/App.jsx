@@ -107,7 +107,7 @@ function AppRoutes() {
 
           <Route element={<Layout />}>
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/inventory" element={<RoleRoute allowedRoles={["store_admin"]}><Inventory /></RoleRoute>} />
+            <Route path="/inventory" element={<RoleRoute allowedRoles={["store_admin", "director", "team_manager"]}><Inventory /></RoleRoute>} />
             <Route path="/requests" element={<RoleRoute allowedRoles={["store_admin"]}><Requests /></RoleRoute>} />
             <Route path="/reports" element={<RoleRoute allowedRoles={["director"]}><Reports /></RoleRoute>} />
             <Route path="/items" element={<RoleRoute allowedRoles={["supervisor"]}><Items /></RoleRoute>} />

@@ -69,7 +69,7 @@ export default async function handler(req: Request) {
     console.log('authz+inventory-select:', Date.now() - t2, 'ms');
 
     const profile = profiles?.[0];
-    if (!profile || !['store_admin', 'director'].includes(profile.role?.toLowerCase())) {
+    if (!profile || !['store_admin', 'director', 'team_manager'].includes(profile.role?.toLowerCase())) {
       return Response.json(
         { error: 'Forbidden: insufficient access' },
         { status: 403 }
