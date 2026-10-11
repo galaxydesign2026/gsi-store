@@ -11,6 +11,7 @@ import DashboardQuickLinks from '@/components/dashboard/DashboardQuickLinks';
 import DashboardTableCard from '@/components/dashboard/DashboardTableCard';
 import DashboardBarCard from '@/components/dashboard/DashboardBarCard';
 import { dashboardKind, isObject, titleCase } from '@/components/dashboard/dashboardFormat';
+import { kpiLink } from '@/components/dashboard/kpiLinks';
 export { default as StatusBadge } from '@/components/dashboard/DashboardStatusBadge';
 
 const gradients = ['bg-gradient-to-br from-blue-500 to-blue-700', 'bg-gradient-to-br from-amber-400 to-orange-500', 'bg-gradient-to-br from-emerald-500 to-green-700', 'bg-gradient-to-br from-purple-500 to-violet-700'];
@@ -26,7 +27,7 @@ export default function Dashboard() {
   return <div className="p-4 md:p-6 max-w-5xl mx-auto animate-fade-in space-y-5">
     <DashboardWelcome profile={profile} role={role} />
     {q.loading ? <div role="status" aria-label="Loading dashboard"><PageLoader /></div> : q.error ? <Card className="space-y-3 rounded-2xl p-5"><h2 className="font-semibold">We couldn't load your dashboard.</h2><p role="alert" className="break-words text-sm text-muted-foreground">{q.error}</p><Button variant="secondary" onClick={q.load}>Retry</Button></Card> : <>
-      {kpis.length > 0 && <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">{kpis.map((entry, i) => <KpiCard key={entry.key} icon={icons[i % icons.length]} label={titleCase(entry.key)} value={entry.value.toLocaleString('en-SG')} gradient={gradients[i % gradients.length]} />)}</div>}
+      {kpis.length > 0 && <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">{kpis.map((entry, i) => <KpiCard key={entry.key} icon={icons[i % icons.length]} label={titleCase(entry.key)} value={entry.value.toLocaleString('en-SG')} gradient={gradients[i % gradients.length]} to={kpiLink(role, entry.key)} />)}</div>}
       <DashboardQuickLinks role={role} />
       {cards.length > 0 && <div className="grid grid-cols-1 md:grid-cols-2 gap-4">{cards.map(entry => entry.kind === 'table' ? <DashboardTableCard key={entry.key} name={entry.key} rows={entry.value} /> : <DashboardBarCard key={entry.key} name={entry.key} values={entry.value} />)}</div>}
       {!entries.length && <Card className="rounded-2xl p-5 text-sm text-muted-foreground">No dashboard data to display yet.</Card>}

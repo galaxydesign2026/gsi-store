@@ -13,8 +13,8 @@ const MONITOR = {
   closed: { label: 'Rejected / Cancelled', statuses: ['rejected', 'cancelled'] },
 };
 
-function DirectorRequestMonitor() {
-  const [tab, setTab] = useState('all');
+function DirectorRequestMonitor({ initialFilter }) {
+  const [tab, setTab] = useState(MONITOR[initialFilter] ? initialFilter : 'all');
   return <>
     <Card className="mt-6 p-4 text-sm text-muted-foreground">
       Monitoring view — item requests are approved by Store Admin, Project Executive and Project Manager, then issued by Store Admin. Open any request to see its items and full approval trail.
@@ -28,11 +28,11 @@ function DirectorRequestMonitor() {
   </>;
 }
 
-export default function ItemRequestApprovals({ role }) {
+export default function ItemRequestApprovals({ role, initialFilter }) {
   return <div className="mx-auto max-w-6xl p-4 md:p-8">
     <PageHeader title="Approvals" subtitle={role === 'director' ? 'Item Request monitoring (all teams)' : 'Item Request review'} icon={ClipboardCheck} />
     {role === 'director'
-      ? <DirectorRequestMonitor />
+      ? <DirectorRequestMonitor initialFilter={initialFilter} />
       : <RequestQueuePanel functionName="listRequestApprovals" title="Item Requests Pending My Approval" approval />}
   </div>;
 }

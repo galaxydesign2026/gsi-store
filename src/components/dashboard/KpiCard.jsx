@@ -13,5 +13,5 @@ export default function KpiCard({ icon: Icon, label, value, gradient, to }) {
       <div className="absolute -bottom-4 -right-4 w-20 h-20 rounded-full bg-white/10" />
     </div>
   );
-  return to ? <Link to={to} className="block">{inner}</Link> : inner;
+  return to ? <Link to={to} aria-label={`${label}: open list`} className="block rounded-2xl transition hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">{inner}</Link> : inner;
 }

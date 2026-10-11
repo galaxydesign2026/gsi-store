@@ -13,9 +13,9 @@ import { stageLabels } from '@/components/approvals/approvalDisplay';
 import { getGsiUser } from '@/lib/gsiUser';
 import { normalizeRole } from '@/lib/roles';
 
-export default function JobSheetApprovalPanel() {
+export default function JobSheetApprovalPanel({ initialTab = 'pending' } = {}) {
   const { data, loading, error, load } = useApprovals();
-  const [tab, setTab] = useState('pending');
+  const [tab, setTab] = useState(initialTab);
   const [reviewId, setReviewId] = useState(null);
   const role = data.role || normalizeRole(getGsiUser()?.role);
   if (loading) return <PageLoader />;
