@@ -346,7 +346,6 @@ export default function Users() {
                     </button>
                   </TableHead>
                   <TableHead>Designation</TableHead>
-                  <TableHead>Role</TableHead>
                   <TableHead>Team</TableHead>
                   <TableHead>Status</TableHead>
                   <TableHead className="text-right">Actions</TableHead>
@@ -371,7 +370,6 @@ export default function Users() {
                     <TableCell className="text-muted-foreground">
                       {u.designation || "—"}
                     </TableCell>
-                    <TableCell><RolePill role={u.role} /></TableCell>
                     <TableCell className="text-muted-foreground">
                       {u.team || "—"}
                     </TableCell>
