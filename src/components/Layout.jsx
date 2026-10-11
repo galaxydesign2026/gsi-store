@@ -113,7 +113,9 @@ export default function Layout() {
         <div className="flex items-center justify-between h-14 px-4">
           {/* Logo */}
           <div className="flex items-center gap-2">
-            <Building2 className="w-5 h-5 text-blue-300 flex-shrink-0" />
+            <span className="flex items-center justify-center w-9 h-9 rounded-full bg-white flex-shrink-0 ring-2 ring-white/30">
+              <img src="/brand/gsi-logo.png" alt="Galaxy Studio Interior" className="w-8 h-8 object-contain" />
+            </span>
             <span className="font-bold text-sm tracking-tight leading-tight">GSI Stock Management</span>
           </div>
 
