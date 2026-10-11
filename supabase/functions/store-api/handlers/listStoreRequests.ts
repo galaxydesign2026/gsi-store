@@ -3,7 +3,8 @@ import { requestCaller, requestQueue, requestSelect, requestFailure, failRequest
 
 export default async function(req) {
   try {
-    await requestCaller(req, ['store_admin']);
+    // Director: read-only monitoring. Approve/issue/cancel handlers still reject directors.
+    await requestCaller(req, ['store_admin', 'director']);
     const input = await req.json();
     let query = requestSelect();
     if (input.statuses !== undefined) {

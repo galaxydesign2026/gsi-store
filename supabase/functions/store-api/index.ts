@@ -19,6 +19,7 @@ import getApprovalJobsheet from './handlers/getApprovalJobsheet.ts';
 import getJobsheet from './handlers/getJobsheet.ts';
 import getJobsheetDropdowns from './handlers/getJobsheetDropdowns.ts';
 import getMyDashboard from './handlers/getMyDashboard.ts';
+import getRequestTrail from './handlers/getRequestTrail.ts';
 import getStoreReport from './handlers/getStoreReport.ts';
 import getTeams from './handlers/getTeams.ts';
 import issueRequest from './handlers/issueRequest.ts';
@@ -53,6 +54,7 @@ const HANDLERS: Record<string, Handler> = {
   getJobsheet,
   getJobsheetDropdowns,
   getMyDashboard,
+  getRequestTrail,
   getStoreReport,
   getTeams,
   issueRequest,
